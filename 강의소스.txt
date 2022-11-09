@@ -1,0 +1,23 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+iris = pd.read_csv('iris.csv')
+
+data = iris.iloc[:,:4].values
+
+X = data[:, :3]
+y = data[:, 3]
+
+import tensorflow as tf
+from tensorflow import keras
+
+model = keras.models.Sequential()
+model.add(keras.layers.Dense(4, activation='relu', input_shape=(3,)))
+model.add(keras.layers.Dense(1))
+
+model.summary()
+
+model.compile(loss='mse', optimizer='sgd')
+
+model.fit(X, y, batch_size=32, epochs=100)
